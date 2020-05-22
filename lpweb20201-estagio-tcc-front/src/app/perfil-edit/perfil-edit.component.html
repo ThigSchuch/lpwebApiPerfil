@@ -1,0 +1,111 @@
+<div class="container mt-5">
+
+    <h1>Editar Perfil</h1>
+  
+    <form (submit)="sendData()" #Perfil="ngForm">
+
+      <div class="form-group mr-3">
+        <label for="nome">Nome: <span class="text-danger">*</span></label>
+        <input required [(ngModel)]="nome"
+          type="text" name="nome"
+          id="nome" class="form-control col-5"
+          #inputName="ngModel" [class.is-invalid]="inputName.errors && (inputName.dirty || inputName.touched)"
+        />
+        <span class="help-block"
+          *ngIf="inputName.errors && (inputName.dirty || inputName.touched)">
+          É necessário informar um nome !
+        </span>
+      </div>
+      
+      <div class="form-row">
+        
+        <div class="form-group mr-3">
+          <label for="sexo">Sexo:</label>
+          <select #inputSex="ngModel"
+            name="sexo" id="sexo"
+            [(ngModel)]="sexo" class="form-control">
+            <option value="F">Feminino</option>
+            <option value="M">Masculino</option>
+          </select>
+        </div>
+
+        <div class="form-group mr-3">
+          <label for="cpf">CPF:</label>
+          <input [(ngModel)]="cpf"
+            #inputCpf="ngModel" id="cpf"
+            name="cpf" type="text"
+            class="form-control" maxlength="15"/>
+        </div>
+
+        <div class="form-group mr-3">
+          <label for="telefone">Telefone:</label>
+          <input [(ngModel)]="telefone"
+            #inputPhone="ngModel" id="telefone"
+            name="telefone" type="text"
+            class="form-control" maxlength="11"/>
+        </div>
+
+      </div>
+      
+      <div class="form-group mr-3">
+        <label for="endereco">Endereço:</label>
+        <textarea [(ngModel)]="endereco"
+          class="form-control" id="endereco"
+          name="endereco" rows="2"
+          #inputAddress="ngModel">
+        </textarea>
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group mr-3">
+          <label for="cidade">Cidade:</label>
+          <input type="text"
+            name="cidade" id="cidade" #inputCity="ngModel"
+            [(ngModel)]="cidade" class="form-control"/>
+        </div>
+
+        <div class="form-group mr-3">
+          <label for="cep">CEP:</label>
+          <input type="text"
+            name="cep" id="cep"
+            #inputCep="ngModel" [(ngModel)]="cep"
+            class="form-control" maxlength="9"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="estado">Estado:</label>
+            <select #inputState="ngModel"
+              name="estado" id="estado"
+              [(ngModel)]="estado_uf" class="form-control">
+              <option *ngFor="let estado of estados" [value]="estado">{{ estado }} </option>
+            </select>
+          </div>
+
+      </div>
+  
+    <button type="submit" [disabled]="Perfil.invalid"
+        class="btn btn-primary"
+        data-toggle="modal" data-target="#ConfirmModal">
+        Atualizar
+    </button>
+    </form>
+  </div>
+  
+  <div class="modal fade text-center" id="ConfirmModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">  
+        <div class="modal-body">
+          <div class="thank-you-pop">
+            <h3>Perfil Atualizado!</h3>
+            <button
+              class="btn btn-primary"
+              data-dismiss="modal"
+              [routerLink]="['/perfil']">
+              Voltar ao início
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
